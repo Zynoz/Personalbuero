@@ -2,7 +2,7 @@ package model;
 
 import java.time.Year;
 
-public class Mitarbeiter 
+public abstract class Mitarbeiter
 {
 	private String name;
 	private Year gebJahr;
