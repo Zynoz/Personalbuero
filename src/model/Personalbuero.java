@@ -37,25 +37,13 @@ public class Personalbuero
 		}
 	}
 
-//	public float berechneGehaltSumme()  // mit Iterator
-//	{
-//		float summe = 0f;
-//		if (mitarbeiter != null)
-//		{
-//			Mitarbeiter m;
-//			Iterator <Mitarbeiter> iter = mitarbeiter.iterator();
-//			while (iter.hasNext())
-//			{
-//				m = iter.next();
-//				summe += m.getGehalt();
-//			}
-//		}
-//		else
-//		{
-//			System.out.println("Null-Referenz bei mitarbeiter");
-//		}
-//		return summe;
-//	}
+	public float berchneGehaltssumme() {
+		float summe = 0f;
+		for (Mitarbeiter mitarbeiter : mitarbeiter) {
+			summe += mitarbeiter.berechneGehalt();
+		}
+		return summe;
+	}
 
 	public String gehaltsListe() // mit Iterator
 	{
