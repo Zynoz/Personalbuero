@@ -48,7 +48,7 @@ public abstract class Mitarbeiter
 	// ------------------------------------ setter ------------------------ 
 	public void setName(String name)
 	{
-		if (name != null && name != "")
+		if (name != null && !name.equals(""))
 		{
 			this.name = name;
 		}
@@ -174,14 +174,10 @@ public abstract class Mitarbeiter
 		System.out.println(toString());
 	}
 
-	public float berechneGehalt()
-	{
-		return 0;
-	}
+	public abstract float berechneGehalt();
 	
 	public int berechneDienstalter()
 	{
 		return Year.now().getValue() - eintrJahr.getValue();
 	}
 }
-

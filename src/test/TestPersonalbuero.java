@@ -16,7 +16,7 @@ public class TestPersonalbuero
 		Adresse adr = new Adresse("AUT", 1050, "Wien", "Spengergasse", 20);
 		Adresse adr1 = new Adresse("AUT", 1010, "Wien", "Stephansplatz", 10);
 		
-		Mitarbeiter m1 = new Mitarbeiter("Anton", Year.of(2000), Year.of(2018), adr1);
+//		Mitarbeiter m1 = new Mitarbeiter("Anton", Year.of(2000), Year.of(2018), adr1);
 //		Mitarbeiter m2 = new Mitarbeiter("Anton", Year.of(1990), Year.of(2018));		
 //		Mitarbeiter m3 = new Mitarbeiter("Berta", Year.of(1990), Year.of(2018));				
 		
@@ -29,7 +29,7 @@ public class TestPersonalbuero
 
 		//pb.aufnehmen(null);
 		
-		System.out.println(pb.aufnehmen(m1));
+//		System.out.println(pb.aufnehmen(m1));
 //		System.out.println(pb.aufnehmen(m2));		
 //		System.out.println(pb.aufnehmen(m3));	
 //		System.out.println(pb);
@@ -160,9 +160,5 @@ public class TestPersonalbuero
 //		System.out.println(pb);
 //		System.out.println(pb.entlassen(0));
 //		System.out.println(pb);
-
-
 	}
-	
-
 }

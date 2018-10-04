@@ -22,4 +22,9 @@ public class Angestellter extends Mitarbeiter
 	{
 		System.out.println(toString());
 	}
+
+	@Override
+	public String toString() {
+		return "Angestellter{} " + super.toString();
+	}
 }

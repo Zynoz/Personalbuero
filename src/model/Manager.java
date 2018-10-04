@@ -8,6 +8,14 @@ public class Manager extends Mitarbeiter {
 
     public Manager(String name, Year gebJahr, Year eintrJahr, Adresse adresse, float fixum) {
         super(name, gebJahr, eintrJahr, adresse);
+        setFixum(fixum);
+    }
+
+    public float getFixum() {
+        return fixum;
+    }
+
+    public void setFixum(float fixum) {
         this.fixum = fixum;
     }
 
@@ -15,10 +23,12 @@ public class Manager extends Mitarbeiter {
         return fixum;
     }
 
+
     @Override
     public String toString() {
         return "Manager{" +
                 "fixum=" + fixum +
+                "Typ: " + this.getClass() +
                 "} " + super.toString();
     }
 }
