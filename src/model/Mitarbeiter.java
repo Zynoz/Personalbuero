@@ -2,8 +2,7 @@ package model;
 
 import java.time.Year;
 
-public abstract class Mitarbeiter
-{
+public abstract class Mitarbeiter implements Comparable<Mitarbeiter> {
 	private String name;
 	private Year gebJahr;
 	private Year eintrJahr;
@@ -179,5 +178,10 @@ public abstract class Mitarbeiter
 	public int berechneDienstalter()
 	{
 		return Year.now().getValue() - eintrJahr.getValue();
+	}
+
+	@Override
+	public int compareTo(Mitarbeiter o) {
+		return Float.compare(berechneGehalt(), o.berechneGehalt());
 	}
 }

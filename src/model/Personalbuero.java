@@ -6,11 +6,11 @@ import java.util.*;
 
 public class Personalbuero
 {
-	private ArrayList<Mitarbeiter> mitarbeiter;
+	private List<Mitarbeiter> mitarbeiter;
 
 	public Personalbuero()
 	{
-		mitarbeiter = new ArrayList<Mitarbeiter>();
+		mitarbeiter = new LinkedList<>();
 	}
 
 // ------------------------- others --------------------------------------------------------	
@@ -262,5 +262,9 @@ public class Personalbuero
 			str = ("keine Mitarbeiter vorhanden");
 		}
 		return str;
+	}
+
+	public void sortiereMitarbeiter() {
+		Collections.sort(mitarbeiter);
 	}
 }
