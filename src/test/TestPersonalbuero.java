@@ -1,11 +1,9 @@
 package test;
 
+import java.io.File;
 import java.time.Year;
 
-import model.Adresse;
-import model.Angestellter;
-import model.Mitarbeiter;
-import model.Personalbuero;
+import model.*;
 
 public class TestPersonalbuero
 {
@@ -34,12 +32,19 @@ public class TestPersonalbuero
 //		System.out.println(pb.aufnehmen(m3));	
 //		System.out.println(pb);
 		
-		System.out.println(pb.aufnehmen(a1));
+		//System.out.println(pb.aufnehmen(a1));
 //		System.out.println(pb.aufnehmen(a2));		
 //		System.out.println(pb.aufnehmen(a3));	
 		System.out.println(pb);
 		System.out.println(pb.gehaltsListe());
-		
+		File file = new File("C:\\scratch\\test.ser");
+		try {
+			pb.loadMitarbeiter(file);
+		} catch (PersonalbueroException e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println(pb.gehaltsListe());
+
 //		System.out.println(pb.entlassenAlle(null));
 //		System.out.println(pb.entlassenAlle(""));		
 //

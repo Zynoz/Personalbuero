@@ -2,6 +2,8 @@ package model;
 
  
 
+import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 
 public class Personalbuero
@@ -51,25 +53,17 @@ public class Personalbuero
 		if (mitarbeiter != null)
 		{
 			Mitarbeiter m;
-			Iterator <Mitarbeiter> iter = mitarbeiter.iterator();
-			while(iter.hasNext())
-			{
-				m = iter.next();
-				if (m != null)
-				{
+			for (Mitarbeiter aMitarbeiter : mitarbeiter) {
+				m = aMitarbeiter;
+				if (m != null) {
 					str.append(m.getName()).append("  EUR ").append(m.berechneGehalt()).append(", ");
-					if (m.getAdresse() != null)
-					{
+					if (m.getAdresse() != null) {
 						str.append(m.getAdresse());
-					}
-					else
-					{
+					} else {
 						str.append(" - derzeit ohne Adresse!");
 					}
 					str.append('\n');
-				}
-				else
-				{
+				} else {
 					System.out.println("Null-Referenz bei mitarbeiter in Collection!!!");
 				}
 			}
@@ -136,7 +130,7 @@ public class Personalbuero
 	public boolean entlassenAlle(String name) // mit iterator
 	{
 		boolean entlassung = false; 
-		if (name != "" && name != null)
+		if (!name.equals("") && name != null)
 		{
 		  Mitarbeiter m;
 		  Iterator <Mitarbeiter> iter = mitarbeiter.iterator();
@@ -151,13 +145,8 @@ public class Personalbuero
 			  }
 			  
 		  }
-		  
-		  if (entlassung)
-		  {
-			  return true;
-		  }
-		  else
-			  return false;
+
+			return entlassung;
 		}
 		else
 			return false;
@@ -171,19 +160,13 @@ public class Personalbuero
 			if (mitarbeiter != null)
 			{
 				Mitarbeiter m;
-				Iterator <Mitarbeiter> iter = mitarbeiter.iterator();
-				while (iter.hasNext())
-				{
-					m = iter.next();
-					if (m != null)
-					{
-						if (m.berechneAlter() > alter)
-						{
+				for (Mitarbeiter aMitarbeiter : mitarbeiter) {
+					m = aMitarbeiter;
+					if (m != null) {
+						if (m.berechneAlter() > alter) {
 							anz++;
 						}
-					}
-					else
-					{
+					} else {
 						System.out.println("Null-Referenz bei mitarbeiter in Collection!!!");
 					}
 				}
@@ -235,20 +218,15 @@ public class Personalbuero
 
 	public String toString()  // mit Iterator
 	{
-		String str = "";
+		StringBuilder str = new StringBuilder();
 		if (mitarbeiter != null)
 		{
 			Mitarbeiter m;
-			Iterator <Mitarbeiter> iter = mitarbeiter.iterator();
-			while (iter.hasNext())
-			{
-				m = iter.next();
-				if (m != null)
-				{
-					str += m + "\n";
-				}
-				else
-				{
+			for (Mitarbeiter aMitarbeiter : mitarbeiter) {
+				m = aMitarbeiter;
+				if (m != null) {
+					str.append(m).append("\n");
+				} else {
 					System.out.println("Null-Referenz bei mitarbeiter in Collection!!!");
 				}
 			}
@@ -257,14 +235,54 @@ public class Personalbuero
 		{
 			System.out.println("Null-Referenz bei Collection mitarbeiter!!!");
 		}
-		if (str.equals(""))
+		if (str.toString().equals(""))
 		{
-			str = ("keine Mitarbeiter vorhanden");
+			str = new StringBuilder(("keine Mitarbeiter vorhanden"));
 		}
-		return str;
+		return str.toString();
 	}
 
 	public void sortiereMitarbeiter() {
 		Collections.sort(mitarbeiter);
+	}
+	public void sortAlter() {
+		mitarbeiter.sort(new MitarbeiterAltersComparator());
+	}
+
+	public void sortGehalt() {
+		mitarbeiter.sort(new MitarbeiterGehaltsComparator());
+	}
+
+	public void saveMitarbeiter(String filename) throws PersonalbueroException {
+		if (filename != null) {
+			try {
+				FileOutputStream fos = new FileOutputStream(filename);
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(mitarbeiter);
+				oos.close();
+			} catch (IOException e) {
+				throw new PersonalbueroException(e.getMessage());
+			}
+			System.out.println("saved");
+		} else {
+			throw new PersonalbueroException("filename is null");
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public void loadMitarbeiter(File file) throws PersonalbueroException {
+		if (file != null) {
+			try {
+				FileInputStream fis = new FileInputStream(file);
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				mitarbeiter = (List<Mitarbeiter>) ois.readObject();
+				ois.close();
+			} catch (IOException | ClassNotFoundException e) {
+				throw new PersonalbueroException(e.getMessage());
+			}
+			System.out.println("loaded");
+		} else {
+			throw new PersonalbueroException("filename is null");
+		}
 	}
 }

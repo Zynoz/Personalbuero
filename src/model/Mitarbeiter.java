@@ -1,8 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.time.Year;
+import java.util.Objects;
+import java.util.UUID;
 
-public abstract class Mitarbeiter implements Comparable<Mitarbeiter> {
+public abstract class Mitarbeiter implements Comparable<Mitarbeiter>, Serializable {
 	private String name;
 	private Year gebJahr;
 	private Year eintrJahr;
@@ -10,7 +13,7 @@ public abstract class Mitarbeiter implements Comparable<Mitarbeiter> {
 	private Adresse adresse;
 
 	public Mitarbeiter(String name, Year gebJahr, Year eintrJahr, Adresse adresse)// , float gehalt)
-	{ 
+	{
 		setName(name);
 		setGebJahr(gebJahr);
 		setEintrJahr(eintrJahr);
@@ -183,5 +186,21 @@ public abstract class Mitarbeiter implements Comparable<Mitarbeiter> {
 	@Override
 	public int compareTo(Mitarbeiter o) {
 		return Float.compare(berechneGehalt(), o.berechneGehalt());
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Mitarbeiter)) return false;
+		Mitarbeiter that = (Mitarbeiter) o;
+		return name.equals(that.name) &&
+				gebJahr.equals(that.gebJahr) &&
+				eintrJahr.equals(that.eintrJahr) &&
+				adresse.equals(that.adresse);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, gebJahr, eintrJahr, adresse);
 	}
 }
